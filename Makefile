@@ -23,7 +23,7 @@ deploy:
 	git push heroku
 
 lint:
-	composer phpcs
+	composer run-script phpcs -- --standard=PSR12 app
 
 lint-fix:
 	composer phpcbf
