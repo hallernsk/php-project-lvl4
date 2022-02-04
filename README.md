@@ -1,4 +1,4 @@
-# php-project-lvl3
+# php-project-lvl4
 
 [![Github Actions Status](https://github.com/hallernsk/php-project-lvl4/workflows/PHP%20CI/badge.svg)](https://github.com/hallernsk/php-project-lvl4/actions)
 
