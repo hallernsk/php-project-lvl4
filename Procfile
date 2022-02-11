@@ -1,1 +1,1 @@
-web: vendor/bin/heroku-php-apache2 public/sudo
+web: vendor/bin/heroku-php-apache2 public/
