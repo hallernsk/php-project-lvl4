@@ -22,3 +22,5 @@ jobs:
       - name: Run linter
         # Run Linter
         run: make lint
+      - name: Execute tests
+        run: php artisan tests
