@@ -22,6 +22,9 @@ test:
 deploy:
 	git push heroku
 
+test-coverage:
+	php artisan test --coverage-clover build/logs/clover.xml
+
 lint:
 	composer run-script phpcs -- --standard=PSR12 app
 
