@@ -23,7 +23,7 @@ deploy:
 	git push heroku
 
 test-coverage:
-	composer exec --verbose phpunit tests -- --coverage-clover build/logs/clover.xml
+	XDEBUG_MODE=coverage composer exec --verbose phpunit tests -- --coverage-clover build/logs/clover.xml
 
 lint:
 	composer run-script phpcs -- --standard=PSR12 app
