@@ -14,7 +14,8 @@ class TaskStatusController extends Controller
      */
     public function index()
     {
-        //
+        $taskStatuses = TaskStatus::paginate();
+        return view('task_statuses.index', compact('taskStatuses'));
     }
 
     /**
@@ -24,7 +25,8 @@ class TaskStatusController extends Controller
      */
     public function create()
     {
-        //
+        $taskStatus = new TaskStatus();
+        return view('task_statuses.create', compact('taskStatus'));
     }
 
     /**
@@ -35,7 +37,18 @@ class TaskStatusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $this->validate($request, [
+            'name' => 'required|unique:task_statuses',
+           ]);
+
+        $taskStatus = new TaskStatus();
+        $taskStatus->fill($data);
+        // При ошибках сохранения возникнет исключение
+        $taskStatus->save();
+        flash('Статус создан');
+        // Редирект на указанный маршрут (вывод статусов)
+        return redirect()
+            ->route('task_statuses.index');
     }
 
     /**
@@ -57,7 +70,7 @@ class TaskStatusController extends Controller
      */
     public function edit(TaskStatus $taskStatus)
     {
-        //
+         return view('task_statuses.edit', compact('taskStatus'));
     }
 
     /**
@@ -69,7 +82,15 @@ class TaskStatusController extends Controller
      */
     public function update(Request $request, TaskStatus $taskStatus)
     {
-        //
+        $data = $this->validate($request, [
+            'name' => 'required|unique:task_statuses,name,' . $taskStatus->id,
+         ]);
+
+        $taskStatus->fill($data);
+        $taskStatus->save();
+        flash('Статус обновлен');
+        return redirect()
+            ->route('task_statuses.index');
     }
 
     /**
@@ -80,6 +101,12 @@ class TaskStatusController extends Controller
      */
     public function destroy(TaskStatus $taskStatus)
     {
-        //
+ //       dd($taskStatus);
+        if ($taskStatus) {
+            $taskStatus->delete();
+        }
+        flash('Cтатус удален');
+        return redirect()
+            ->route('task_statuses.index');
     }
 }
