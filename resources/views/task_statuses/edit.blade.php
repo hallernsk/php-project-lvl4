@@ -13,9 +13,9 @@
     @endif
 
     {{ Form::model($taskStatus, ['route' => ['task_statuses.update', $taskStatus], 'method' => 'PATCH']) }}
-        {{ Form::label('name', 'Имя') }}
+        {{ Form::label('name', __('task_statuses.name')) }}
         {{ Form::text('name') }}<br>
-    {{ Form::submit('Обновить') }}
+    {{ Form::submit(__('task_statuses.to_update')) }}
     {{ Form::close() }}
 
 @endsection

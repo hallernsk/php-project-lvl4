@@ -45,7 +45,7 @@ class TaskStatusController extends Controller
         $taskStatus->fill($data);
         // При ошибках сохранения возникнет исключение
         $taskStatus->save();
-        flash('Статус создан');
+        flash(__('flash.status_created'));
         // Редирект на указанный маршрут (вывод статусов)
         return redirect()
             ->route('task_statuses.index');
@@ -88,7 +88,7 @@ class TaskStatusController extends Controller
 
         $taskStatus->fill($data);
         $taskStatus->save();
-        flash('Статус обновлен');
+        flash(__('flash.status_changed'));
         return redirect()
             ->route('task_statuses.index');
     }
@@ -105,7 +105,7 @@ class TaskStatusController extends Controller
         if ($taskStatus) {
             $taskStatus->delete();
         }
-        flash('Cтатус удален');
+        flash(__('flash.status_deleted'));
         return redirect()
             ->route('task_statuses.index');
     }

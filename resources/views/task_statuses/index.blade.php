@@ -4,17 +4,18 @@
 
     @include('flash::message')
 
-    <h1>Статусы</h1>
+    <h1>{{ __('task_statuses.statuses') }}</h1>
+
     <a href="{{ route('task_statuses.create') }}" class="btn btn-primary">
-        Создать статус        </a>
+        {{ __('task_statuses.to_create_status') }}        </a>
 
     <table class="table mt-2">
         <thead>
         <tr>
-            <th>ID</th>
-            <th>Имя</th>
-            <th>Дата создания</th>
-            <th>Действия</th>
+            <th>{{ __('task_statuses.id') }}</th>
+            <th>{{ __('task_statuses.name') }}</th>
+            <th>{{ __('task_statuses.date_of_create') }}</th>
+            <th>{{ __('task_statuses.actions') }}</th>
         </tr>
         </thead>
 
@@ -27,14 +28,14 @@
                     <a
                         class="text-danger text-decoration-none"
                         href="{{ route('task_statuses.destroy', $taskStatus) }}"
-                        data-confirm="Вы уверены?"
+                        data-confirm="{{ __('task_statuses.are_you_sure') }}"
                         data-method="delete"
                         rel="nofollow"
                     >
-                        Удалить                        </a>
+                        {{ __('task_statuses.to_delete') }}                        </a>
 
                     <a class="text-decoration-none" href="{{ route('task_statuses.edit', $taskStatus) }}">
-                        Изменить                        </a>
+                        {{ __('task_statuses.to_change') }}                        </a>
                 </td>
             </tr>
 

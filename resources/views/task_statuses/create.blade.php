@@ -13,9 +13,9 @@
     @endif
 
     {{ Form::model($taskStatus, ['route' => 'task_statuses.store']) }}
-    {{ Form::label('name', 'Имя') }}
+    {{ Form::label('name', __('task_statuses.name') ) }}
     {{ Form::text('name') }}<br>
-    {{ Form::submit('Создать') }}
+    {{ Form::submit( __('task_statuses.to_create') ) }}
     {{ Form::close() }}
 
 @endsection
