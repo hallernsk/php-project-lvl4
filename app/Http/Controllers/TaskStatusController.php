@@ -15,6 +15,7 @@ class TaskStatusController extends Controller
     public function index()
     {
         $taskStatuses = TaskStatus::paginate();
+      //  dd($taskStatuses);
         return view('task_statuses.index', compact('taskStatuses'));
     }
 
@@ -26,6 +27,7 @@ class TaskStatusController extends Controller
     public function create()
     {
         $taskStatus = new TaskStatus();
+  //      dd($taskStatus);
         return view('task_statuses.create', compact('taskStatus'));
     }
 
@@ -43,6 +45,7 @@ class TaskStatusController extends Controller
 
         $taskStatus = new TaskStatus();
         $taskStatus->fill($data);
+ //       dd($taskStatus);
         // При ошибках сохранения возникнет исключение
         $taskStatus->save();
         flash(__('flash.status_created'));
@@ -70,7 +73,8 @@ class TaskStatusController extends Controller
      */
     public function edit(TaskStatus $taskStatus)
     {
-         return view('task_statuses.edit', compact('taskStatus'));
+  //     dd($taskStatus);
+        return view('task_statuses.edit', compact('taskStatus'));
     }
 
     /**
@@ -82,6 +86,9 @@ class TaskStatusController extends Controller
      */
     public function update(Request $request, TaskStatus $taskStatus)
     {
+ //       dd($request);
+ //       dd($taskStatus);
+
         $data = $this->validate($request, [
             'name' => 'required|unique:task_statuses,name,' . $taskStatus->id,
          ]);
