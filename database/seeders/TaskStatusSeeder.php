@@ -15,12 +15,11 @@ class TaskStatusSeeder extends Seeder
      */
     public function run()
     {
-        $statuses = [
-            ['name' => 'новый', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['name' => 'в работе', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['name' => 'на тестировании', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['name' => 'завершен', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-        ];
+        $statuses = [];
+        $statusNames = ['новый', 'в работе', 'на тестировании', 'завершен'];
+        foreach ($statusNames as $name) {
+            $statuses[] = ['name' => $name, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()];
+        }
         DB::table('task_statuses')->insert($statuses);
     }
 }
