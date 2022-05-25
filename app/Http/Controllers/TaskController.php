@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Task;
+use App\Models\TaskStatus;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -13,7 +16,12 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        $tasks = Task::paginate();
+        $statuses = TaskStatus::pluck('name', 'id')->all();
+ //       dd($statuses);
+        $users = User::pluck('name', 'id')->all();
+ //       dd($users);
+        return view('tasks.index', ['tasks' => $tasks, 'statuses' => $statuses, 'users' => $users]);
     }
 
     /**
@@ -23,7 +31,9 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        $task = new Task();
+        //      dd($task);
+        return view('tasks.create', compact('task'));        //
     }
 
     /**
@@ -34,7 +44,23 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        {
+    //        dd($request);
+            $data = $this->validate($request, [
+                'name' => 'required|unique:tasks',
+                'description' => 'required',
+                'performer' => 'nullable',
+            ]);
+ //           dd($data);
+            $task = new Task();
+            $task->fill($data);
+            //       dd($task);
+            $task->save();
+            flash(__('task_created'));
+            // Редирект на указанный маршрут (вывод статусов)
+            return redirect()
+                ->route('tasks.index');
+        }
     }
 
     /**
@@ -54,9 +80,10 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Task $task)
     {
-        //
+        //     dd($task);
+        return view('tasks.edit', compact('task'));
     }
 
     /**
@@ -66,9 +93,20 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Task $task)
     {
-        //
+        //       dd($request);
+        //       dd($task);
+
+        $data = $this->validate($request, [
+            'name' => 'required|unique:tasks,name,' . $task->id,
+        ]);
+
+        $task->fill($data);
+        $task->save();
+        flash(__('flash.task_changed'));
+        return redirect()
+            ->route('tasks.index');
     }
 
     /**
@@ -77,8 +115,14 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Task $task)
     {
-        //
+        //       dd($task);
+        if ($task) {
+            $task->delete();
+        }
+        flash(__('flash.task_deleted'));
+        return redirect()
+            ->route('tasks.index');
     }
 }

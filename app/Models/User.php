@@ -43,4 +43,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // Во множественном числе потому что это коллекция
+    public function tasksCreated()
+    {
+        // У каждого пользователя (может быть) много созданных задач
+        return $this->hasMany('App\Models\Task', 'created_by_id');
+    }
+
+    public function tasksAssigned()
+    {
+        // У каждого пользователя (может быть) много порученных ему задач
+        return $this->hasMany('App\Models\Task', 'assigned_to_id');
+    }
 }

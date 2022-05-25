@@ -38,7 +38,7 @@
 
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link " href="{{ url('/') }}">
+                            <a class="nav-link " href="{{ route('tasks.index') }}">
                                 {{ __('app.tasks') }}                            </a>
                         </li>
                         <li class="nav-item">
