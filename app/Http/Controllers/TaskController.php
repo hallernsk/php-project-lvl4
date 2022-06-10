@@ -6,6 +6,7 @@ use App\Models\Task;
 use App\Models\TaskStatus;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -33,7 +34,11 @@ class TaskController extends Controller
     {
         $task = new Task();
         //      dd($task);
-        return view('tasks.create', compact('task'));        //
+        $taskStatuses = TaskStatus::pluck('name', 'id')->all();
+      //  dd($taskStatuses);
+        $users = User::pluck('name', 'id')->all();
+    //    dd($users);
+        return view('tasks.create', compact('task', 'taskStatuses', 'users'));        //
     }
 
     /**
@@ -48,16 +53,22 @@ class TaskController extends Controller
     //        dd($request);
             $data = $this->validate($request, [
                 'name' => 'required|unique:tasks',
+                'status_id' => 'required',
                 'description' => 'required',
-                'performer' => 'nullable',
+                'assigned_to_id' => 'required',
             ]);
- //           dd($data);
-            $task = new Task();
+     //       dd($data);
+            $user = Auth::user();   //  получение аут-го юзера при помощи фасада
+    //        $user = auth()->user();   // ... при помощи хелпера
+    //       dd($user);
+            $task = $user->tasksCreated()->make();
+    //        dd($task);
             $task->fill($data);
-            //       dd($task);
+    //        $task->created_by_id = Auth::id();    так нельзя!!!
+    //        dd($task);
             $task->save();
-            flash(__('task_created'));
-            // Редирект на указанный маршрут (вывод статусов)
+            flash(__('flash.task_created'));
+            // Редирект на указанный маршрут (вывод задач)
             return redirect()
                 ->route('tasks.index');
         }
@@ -71,7 +82,11 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-        //
+        $task = Task::findOrFail($id);
+ //       dd($task);
+        $status = TaskStatus::findOrFail($task->status_id);
+    //    dd($status);
+        return view('tasks.show', compact('task', 'status'));
     }
 
     /**

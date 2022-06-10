@@ -6,5 +6,6 @@ return [
     'statuses' => 'Статусы',
     'labels' => 'Метки',
     'Login' => 'Вход',
-    'Register' => 'Регистрация',
+    'Register' => 'Регистрация'
+
 ];

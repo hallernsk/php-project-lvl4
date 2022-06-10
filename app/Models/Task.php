@@ -31,6 +31,4 @@ class Task extends Model
         // поручена пользователю
         return $this->belongsTo(User::class, 'assigned_to_id');
     }
-
 }
-

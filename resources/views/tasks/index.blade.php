@@ -28,7 +28,7 @@
             <tr>
                 <td>{{ $task->id }}</td>
                 <td>{{ $task->status->name }}</td> <!-- ???????????????? статус(name) -->
-                <td>{{ $task->name }}</td>
+                <td><a href="{{ route('tasks.show', ['task' => $task->id]) }} ">{{ $task->name }}</td>
                 <td>{{ $task->creator->name }}</td> <!-- ????????????????? создатель (name) -->
                 <td>{{ $task->performer->name }}</td> <!-- ????????????????? исполнитель (name) -->
                 <td>{{ $task->created_at }}</td>
