@@ -97,8 +97,12 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        //     dd($task);
-        return view('tasks.edit', compact('task'));
+ //       dd($task);
+        $taskStatuses = TaskStatus::pluck('name', 'id')->all();
+//        dd($taskStatuses);
+        $users = User::pluck('name', 'id')->all();
+//        dd($users);
+        return view('tasks.edit', compact('task', 'taskStatuses', 'users'));
     }
 
     /**
@@ -113,12 +117,17 @@ class TaskController extends Controller
         //       dd($request);
         //       dd($task);
 
-        $data = $this->validate($request, [
+          $data = $this->validate($request, [
             'name' => 'required|unique:tasks,name,' . $task->id,
-        ]);
-
+            'description' => 'required',
+            'status_id' => 'required',
+            'assigned_to_id' => 'required',
+          ]);
         $task->fill($data);
         $task->save();
+
+//        $task->update($request->only(['name', 'description', 'status_id', 'assigned_to_id']));
+//        ...  и так тоже работает ( метод update() )
         flash(__('flash.task_changed'));
         return redirect()
             ->route('tasks.index');
@@ -132,7 +141,7 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        //       dd($task);
+    //           dd($task);
         if ($task) {
             $task->delete();
         }

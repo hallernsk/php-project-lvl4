@@ -33,8 +33,18 @@
                 <td>{{ $task->performer->name }}</td> <!-- ????????????????? исполнитель (name) -->
                 <td>{{ $task->created_at }}</td>
                 @auth
-                <td>
 
+                <td>
+                    @if ($task->created_by_id == Auth::id())
+                    <a
+                        class="text-danger text-decoration-none"
+                        href="{{ route('tasks.destroy', $task) }}"
+                        data-confirm="{{ __('tasks.are_you_sure') }}"
+                        data-method="delete"
+                        rel="nofollow"
+                    >
+                        {{ __('tasks.to_delete') }}                        </a>
+                    @endif
                     <a class="text-decoration-none" href="{{ route('tasks.edit', $task) }}">
                         {{ __('tasks.to_change') }}                        </a>
                 </td>
