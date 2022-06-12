@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\TaskStatus;
 use Illuminate\Http\Request;
 
+use function PHPUnit\Framework\isEmpty;
+
 class TaskStatusController extends Controller
 {
     /**
@@ -108,7 +110,12 @@ class TaskStatusController extends Controller
      */
     public function destroy(TaskStatus $taskStatus)
     {
- //       dd($taskStatus);
+ //       dd($taskStatus->tasks);
+        if ($taskStatus->tasks()->exists()) {
+            flash(__('flash.status_cannot_deleted'));
+            return redirect()
+                ->route('task_statuses.index');
+        };
         if ($taskStatus) {
             $taskStatus->delete();
         }
