@@ -16,7 +16,7 @@ class TaskControllerTest extends TestCase
      *
      * @return void
      */
- //   use RefreshDatabase;
+    use RefreshDatabase;
 
     private User $user;
 
