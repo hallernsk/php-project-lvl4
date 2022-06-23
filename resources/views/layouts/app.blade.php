@@ -46,7 +46,7 @@
                                 {{ __('app.statuses') }}                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " href="{{ url('/') }}">
+                            <a class="nav-link " href="{{ route('labels.index') }}">
                                 {{ __('app.labels') }}                            </a>
                         </li>
                     </ul>
