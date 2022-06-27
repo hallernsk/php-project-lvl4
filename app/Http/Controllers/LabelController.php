@@ -109,13 +109,13 @@ class LabelController extends Controller
      */
     public function destroy(Label $label)
     {
-        //       dd($label->tasks);
+        //     dd($label->tasks);
 
- /*       if ($label->tasks()->exists()) {
+        if ($label->tasks()->exists()) {
             flash(__('flash.label_cannot_deleted'));
             return redirect()
-                ->route('task_statuses.index');
-        };  */
+                ->route('labels.index');
+        };
 
         if ($label) {
             $label->delete();

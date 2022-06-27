@@ -21,6 +21,10 @@
     {{ Form::select('status_id', $taskStatuses) }}<br>
     {{ Form::label('performer', __('tasks.performer') ) }}<br>
     {{ Form::select('assigned_to_id', $users) }}<br>
+
+    {{ Form::label('labels', __('tasks.labels') ) }}<br>
+    {{ Form::select('labels[]', $labels, null, ['multiple' => 'multiple']) }}<br>
+
     {{ Form::submit( __('tasks.to_change') ) }}
     {{ Form::close() }}
 

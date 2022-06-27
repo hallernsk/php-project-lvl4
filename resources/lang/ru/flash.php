@@ -11,4 +11,5 @@ return [
     'label_created' => 'Метка успешно создана',
     'label_changed' => 'Метка успешно изменена',
     'label_deleted' => 'Метка успешно удалена',
+    'label_cannot_deleted' => 'Не удалось удалить метку',
 ];

@@ -5,6 +5,7 @@ return [
     'id' => 'ID',
     'status' => 'Статус',
     'name' => 'Имя',
+    'labels' => 'Метки',
     'show_name' => 'Просмотр задачи',
     'description' => 'Описание',
     'author' => 'Автор',
