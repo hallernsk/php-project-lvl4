@@ -31,4 +31,9 @@ class Task extends Model
         // поручена пользователю
         return $this->belongsTo(User::class, 'assigned_to_id');
     }
+
+    public function labels()
+    {
+        return $this->belongsToMany(Label::class);
+    }
 }
