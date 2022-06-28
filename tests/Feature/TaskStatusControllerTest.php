@@ -34,13 +34,6 @@ class TaskStatusControllerTest extends TestCase
         $response->assertOk();
     }
 
-    public function testEdit()
-    {
-        $taskStatus = TaskStatus::factory()->create();
-        $response = $this->get(route('task_statuses.edit', [$taskStatus]));
-        $response->assertOk();
-    }
-
     public function testStore()
     {
         $data = TaskStatus::factory()->make()->only('name');
@@ -49,6 +42,13 @@ class TaskStatusControllerTest extends TestCase
         $response->assertSessionHasNoErrors();
 
         $this->assertDatabaseHas('task_statuses', $data);
+    }
+
+    public function testEdit()
+    {
+        $taskStatus = TaskStatus::factory()->create();
+        $response = $this->get(route('task_statuses.edit', [$taskStatus]));
+        $response->assertOk();
     }
 
     public function testUpdate()
