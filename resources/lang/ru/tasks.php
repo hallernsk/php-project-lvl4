@@ -14,6 +14,7 @@ return [
     'to_create' => 'Создать задачу',
     'to_change' => 'Изменить',
     'actions' => 'Действия',
+    'to_apply' => 'Применить',
 
     'to_delete' => 'Удалить',
     'statuses' => 'Статусы',

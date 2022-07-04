@@ -9,6 +9,8 @@ use App\Models\Label;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class TaskController extends Controller
 {
@@ -17,9 +19,19 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $tasks = Task::paginate(100);
+
+     // dd($request);
+        $tasks = QueryBuilder::for(Task::class)
+            ->allowedFilters([
+                AllowedFilter::exact('status_id'),
+                AllowedFilter::exact('created_by_id'),
+                AllowedFilter::exact('assigned_to_id')
+            ])
+            ->get();
+        //dd($tasks);
         $statuses = TaskStatus::pluck('name', 'id')->all();
  //       dd($statuses);
         $users = User::pluck('name', 'id')->all();
@@ -146,7 +158,7 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        //       dd($request);
+     //          dd($request);
         //       dd($task);
 
           $data = $this->validate($request, [
@@ -192,9 +204,8 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
     //           dd($task);
-        if ($task) {
-            $task->delete();
-        }
+        DB::table('label_task')->where('task_id', '=', $task->id)->delete();
+        $task->delete();
         flash(__('flash.task_deleted'));
         return redirect()
             ->route('tasks.index');
