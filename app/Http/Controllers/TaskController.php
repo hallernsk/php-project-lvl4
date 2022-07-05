@@ -96,7 +96,7 @@ class TaskController extends Controller
             }
         }
 
-            flash(__('flash.task_created'));
+            flash(__('flash.task_created'))->success();
             // Редирект на указанный маршрут (вывод задач)
             return redirect()
                 ->route('tasks.index');
@@ -190,7 +190,7 @@ class TaskController extends Controller
 
 //        $task->update($request->only(['name', 'description', 'status_id', 'assigned_to_id']));
 //        ...  и так тоже работает ( метод update() )
-        flash(__('flash.task_changed'));
+        flash(__('flash.task_changed'))->success();
         return redirect()
             ->route('tasks.index');
     }
@@ -206,7 +206,7 @@ class TaskController extends Controller
     //           dd($task);
         DB::table('label_task')->where('task_id', '=', $task->id)->delete();
         $task->delete();
-        flash(__('flash.task_deleted'));
+        flash(__('flash.task_deleted'))->success();
         return redirect()
             ->route('tasks.index');
     }

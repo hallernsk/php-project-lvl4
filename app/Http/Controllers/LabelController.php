@@ -49,7 +49,7 @@ class LabelController extends Controller
           //     dd($label);
         // При ошибках сохранения возникнет исключение
         $label->save();
-        flash(__('flash.label_created'));
+        flash(__('flash.label_created'))->success();
         // Редирект на указанный маршрут (вывод статусов)
         return redirect()
             ->route('labels.index');
@@ -96,7 +96,7 @@ class LabelController extends Controller
 
         $label->fill($data);
         $label->save();
-        flash(__('flash.label_changed'));
+        flash(__('flash.label_changed'))->success();
         return redirect()
             ->route('labels.index');
     }
@@ -112,7 +112,7 @@ class LabelController extends Controller
         //     dd($label->tasks);
 
         if ($label->tasks()->exists()) {
-            flash(__('flash.label_cannot_deleted'));
+            flash(__('flash.label_cannot_deleted'))->error();
             return redirect()
                 ->route('labels.index');
         };
@@ -120,7 +120,7 @@ class LabelController extends Controller
         if ($label) {
             $label->delete();
         }
-        flash(__('flash.label_deleted'));
+        flash(__('flash.label_deleted'))->success();
         return redirect()
             ->route('labels.index');
     }
