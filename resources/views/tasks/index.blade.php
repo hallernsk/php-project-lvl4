@@ -18,7 +18,7 @@
 
 @auth
 <a href="{{ route('tasks.create') }}" class="btn btn-primary">
-    {{ __('tasks.to_create') }}        </a>
+    {{ __('tasks.to_create_task') }}        </a>
 @endauth
 <table class="table mt-2">
     <thead>
