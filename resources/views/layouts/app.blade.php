@@ -38,16 +38,25 @@
 
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link " href="{{ route('tasks.index') }}">
-                                {{ __('app.tasks') }}                            </a>
+                            @if(Route::is('tasks.index'))
+                                <a class="nav-link active" href="{{ route('tasks.index') }}"> {{ __('app.tasks') }} </a>
+                            @else
+                                <a class="nav-link" href="{{ route('tasks.index') }}"> {{ __('app.tasks') }} </a>
+                            @endif
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " href="{{ route('task_statuses.index') }}">
-                                {{ __('app.statuses') }}                            </a>
+                            @if(Route::is('task_statuses.index'))
+                                <a class="nav-link active" href="{{ route('task_statuses.index') }}"> {{ __('app.statuses') }} </a>
+                            @else
+                                <a class="nav-link" href="{{ route('task_statuses.index') }}"> {{ __('app.statuses') }} </a>
+                            @endif
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " href="{{ route('labels.index') }}">
-                                {{ __('app.labels') }}                            </a>
+                            @if(Route::is('labels.index'))
+                                <a class="nav-link active" href="{{ route('labels.index') }}"> {{ __('app.labels') }} </a>
+                            @else
+                                <a class="nav-link" href="{{ route('labels.index') }}"> {{ __('app.labels') }} </a>
+                            @endif
                         </li>
                     </ul>
 

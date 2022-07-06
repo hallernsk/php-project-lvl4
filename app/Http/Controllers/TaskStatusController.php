@@ -50,7 +50,7 @@ class TaskStatusController extends Controller
  //       dd($taskStatus);
         // При ошибках сохранения возникнет исключение
         $taskStatus->save();
-        flash(__('flash.status_created'));
+        flash(__('flash.status_created'))->success();
         // Редирект на указанный маршрут (вывод статусов)
         return redirect()
             ->route('task_statuses.index');
