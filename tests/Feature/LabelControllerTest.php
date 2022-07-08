@@ -24,7 +24,6 @@ class LabelControllerTest extends TestCase
     public function testIndex()
     {
         $response = $this->get(route('labels.index'));
-      //  dd($response);
         $response->assertOk();
     }
 
@@ -37,9 +36,7 @@ class LabelControllerTest extends TestCase
     public function testStore()
     {
         $data = Label::factory()->make()->only('name', 'description');
-   //     dd($data);
         $response = $this->post(route('labels.store'), $data);
-      //  dd($response);
         $response->assertRedirect(route('labels.index'));
         $response->assertSessionHasNoErrors();
         $this->assertDatabaseHas('labels', $data);
@@ -48,21 +45,15 @@ class LabelControllerTest extends TestCase
     public function testEdit()
     {
         $label = Label::factory()->create();
-        //    dd($label);
         $response = $this->get(route('labels.edit', [$label]));
-        //dd($response) ;
         $response->assertOk();
     }
 
     public function testUpdate()
     {
         $label = Label::factory()->create();
-        //     dd($label);
         $data = Label::factory()->make()->only('name', 'description');
-        //     dd($data);
-
         $response = $this->patch(route('labels.update', $label), $data);
-        //dd($response);
         $response->assertRedirect(route('labels.index'));
         $response->assertSessionHasNoErrors();
         $this->assertDatabaseHas('labels', $data);
@@ -71,10 +62,7 @@ class LabelControllerTest extends TestCase
     public function testDestroy()
     {
         $label = Label::factory()->create();
-         //     dd($label);
         $response = $this->delete(route('labels.destroy', [$label]));
-      //       dd($response);
-      //  dd($label->only('id'));
         $response->assertSessionHasNoErrors();
         $response->assertRedirect(route('labels.index'));
 

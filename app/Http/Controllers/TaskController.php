@@ -21,9 +21,6 @@ class TaskController extends Controller
      */
     public function index(Request $request)
     {
-        $tasks = Task::paginate(100);
-
-     // dd($request);
         $tasks = QueryBuilder::for(Task::class)
             ->allowedFilters([
                 AllowedFilter::exact('status_id'),
@@ -31,11 +28,8 @@ class TaskController extends Controller
                 AllowedFilter::exact('assigned_to_id')
             ])
             ->get();
-        //dd($tasks);
         $statuses = TaskStatus::pluck('name', 'id')->all();
- //       dd($statuses);
         $users = User::pluck('name', 'id')->all();
- //       dd($users);
         return view('tasks.index', ['tasks' => $tasks, 'statuses' => $statuses, 'users' => $users]);
     }
 
@@ -47,12 +41,9 @@ class TaskController extends Controller
     public function create()
     {
         $task = new Task();
-        //      dd($task);
         $taskStatuses = TaskStatus::pluck('name', 'id')->all();
-      //  dd($taskStatuses);
         $users = User::pluck('name', 'id')->all();
         $labels = Label::pluck('name', 'id')->all();
-    //    dd($users);
         return view('tasks.create', compact('task', 'taskStatuses', 'users', 'labels'));        //
     }
 
@@ -65,30 +56,20 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         {
- //           dd($request);
             $data = $this->validate($request, [
                 'name' => 'required|unique:tasks',
                 'status_id' => 'required',
                 'description' => 'required',
                 'assigned_to_id' => 'required',
-         //       'labels' => 'required',
             ]);
-     //       dd($data);
-            $user = Auth::user();   //  получение аут-го юзера при помощи фасада
-    //        $user = auth()->user();   // ... при помощи хелпера
-    //       dd($user);
+            $user = Auth::user();
             $task = $user->tasksCreated()->make();
-    //        dd($task);
             $task->fill($data);
-    //        $task->created_by_id = Auth::id();    так нельзя!!!
-    //        dd($task);
             $task->save();
 
             $labels = $request->labels;
         if ($labels) {
-                //   dd($labels);
             foreach ($labels as $label) {
-                    //           dd($label);
                     DB::table('label_task')->insert([
                         'label_id' => $label,
                         'task_id' => $task->id
@@ -97,7 +78,6 @@ class TaskController extends Controller
         }
 
             flash(__('flash.task_created'))->success();
-            // Редирект на указанный маршрут (вывод задач)
             return redirect()
                 ->route('tasks.index');
         }
@@ -112,22 +92,12 @@ class TaskController extends Controller
     public function show($id)
     {
         $task = Task::findOrFail($id);
- //       dd($task);
         $status = TaskStatus::findOrFail($task->status_id);
-    //    dd($status);
-
         $labels = DB::select('select * from label_task where task_id = ?', [$task->id]);
-//        dd($labels);
-      //  $labels_names = DB::select('select name from labels where id = 1',);
-
         $labels_names = [];
         foreach ($labels as $label) {
-      //    dd($label->label_id);
             $labels_names[] = DB::table('labels')->where('id', [$label->label_id])->pluck('name');
-       //     $labels_names[] = DB::select('select name from labels where id = ?', [$label->label_id]);
-      //      dd($labels_names[0][0]);
         }
-   //     dd(reset($labels_names));
 
         return view('tasks.show', compact('task', 'status', 'labels_names'));
     }
@@ -140,11 +110,8 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
- //       dd($task);
         $taskStatuses = TaskStatus::pluck('name', 'id')->all();
-//        dd($taskStatuses);
         $users = User::pluck('name', 'id')->all();
-//        dd($users);
         $labels = Label::pluck('name', 'id')->all();
         return view('tasks.edit', compact('task', 'taskStatuses', 'users', 'labels'));
     }
@@ -158,24 +125,16 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-     //          dd($request);
-        //       dd($task);
-
           $data = $this->validate($request, [
             'name' => 'required|unique:tasks,name,' . $task->id,
             'description' => 'required',
             'status_id' => 'required',
             'assigned_to_id' => 'required',
-    //          'labels' => 'required'
           ]);
-    //      dd($data);
         $task->fill($data);
         $task->save();
 
-        // сначала удалить в  label_task все записи для текущей задачи:
         DB::delete('delete from label_task where task_id = ?', [$task->id]);
-//        DB::table(label_task)->delete()->where('task_id', $task->id);
-
 
         $labels = $request->labels;
         if ($labels) {
@@ -188,8 +147,6 @@ class TaskController extends Controller
             }
         }
 
-//        $task->update($request->only(['name', 'description', 'status_id', 'assigned_to_id']));
-//        ...  и так тоже работает ( метод update() )
         flash(__('flash.task_changed'))->success();
         return redirect()
             ->route('tasks.index');
@@ -203,7 +160,6 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-    //           dd($task);
         DB::table('label_task')->where('task_id', '=', $task->id)->delete();
         $task->delete();
         flash(__('flash.task_deleted'))->success();

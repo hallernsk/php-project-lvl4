@@ -54,26 +54,19 @@ class TaskStatusControllerTest extends TestCase
     public function testUpdate()
     {
         $taskStatus = TaskStatus::factory()->create();
-   //     dd($taskStatus);
         $data = TaskStatus::factory()->make()->only('name');
-   //     dd($data);
-
         $response = $this->patch(route('task_statuses.update', $taskStatus), $data);
         $response->assertRedirect(route('task_statuses.index'));
         $response->assertSessionHasNoErrors();
-
         $this->assertDatabaseHas('task_statuses', $data);
     }
 
     public function testDestroy()
     {
         $taskStatus = TaskStatus::factory()->create();
-  //      dd($taskStatus);
         $response = $this->delete(route('task_statuses.destroy', [$taskStatus]));
-   //     dd($response);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect(route('task_statuses.index'));
-
         $this->assertDatabaseMissing('task_statuses', $taskStatus->only('id'));
     }
 

@@ -15,7 +15,6 @@ class LabelController extends Controller
     public function index()
     {
         $labels = Label::paginate();
-        //  dd($labels);
         return view('labels.index', compact('labels'));
     }
 
@@ -27,7 +26,6 @@ class LabelController extends Controller
     public function create()
     {
         $label = new Label();
-        //      dd($label);
         return view('labels.create', compact('label'));
     }
 
@@ -46,27 +44,13 @@ class LabelController extends Controller
 
         $label = new Label();
         $label->fill($data);
-          //     dd($label);
-        // При ошибках сохранения возникнет исключение
         $label->save();
         flash(__('flash.label_created'))->success();
-        // Редирект на указанный маршрут (вывод статусов)
         return redirect()
             ->route('labels.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
+     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -86,9 +70,6 @@ class LabelController extends Controller
      */
     public function update(Request $request, Label $label)
     {
-        //       dd($request);
-        //       dd($label);
-
         $data = $this->validate($request, [
             'name' => 'required|unique:labels,name,' . $label->id,
             'description' => 'required',
@@ -109,8 +90,6 @@ class LabelController extends Controller
      */
     public function destroy(Label $label)
     {
-        //     dd($label->tasks);
-
         if ($label->tasks()->exists()) {
             flash(__('flash.label_cannot_deleted'))->error();
             return redirect()

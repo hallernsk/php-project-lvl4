@@ -15,7 +15,6 @@ class TaskStatus extends Model
 
     public function tasks()
     {
-        // Каждый статус может быть у многих задач
         return $this->hasMany(Task::class, 'status_id');
     }
 }

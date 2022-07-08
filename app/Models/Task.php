@@ -15,20 +15,16 @@ class Task extends Model
 
     public function status()
     {
-        // имеет статус
-        // belongsTo определяется у модели, содержащей внешний ключ
         return $this->belongsTo(TaskStatus::class);
     }
 
     public function creator()
     {
-        // создана пользователем
         return $this->belongsTo(User::class, 'created_by_id');
     }
 
     public function performer()
     {
-        // поручена пользователю
         return $this->belongsTo(User::class, 'assigned_to_id');
     }
 
