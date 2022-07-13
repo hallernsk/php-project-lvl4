@@ -28,8 +28,8 @@ class TaskController extends Controller
                 AllowedFilter::exact('assigned_to_id')
             ])
             ->get();
-        $statuses = TaskStatus::pluck('name', 'id')->all();
-        $users = User::pluck('name', 'id')->all();
+        $statuses = TaskStatus::pluck('name', 'id');
+        $users = User::pluck('name', 'id');
         return view('tasks.index', ['tasks' => $tasks, 'statuses' => $statuses, 'users' => $users]);
     }
 
@@ -55,32 +55,22 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        {
-            $data = $this->validate($request, [
-                'name' => 'required|unique:tasks',
-                'status_id' => 'required',
-                'description' => 'required',
-                'assigned_to_id' => 'required',
-            ]);
-            $user = Auth::user();
-            $task = $user->tasksCreated()->make();
-            $task->fill($data);
-            $task->save();
+        $data = $this->validate($request, [
+            'name' => 'required|unique:tasks',
+            'status_id' => 'required',
+            'description' => 'required',
+            'assigned_to_id' => 'required',
+        ]);
+        $user = Auth::user();
+        $task = $user->tasksCreated()->make($data);
+        $task->save();
 
-            $labels = $request->labels;
-        if ($labels) {
-            foreach ($labels as $label) {
-                    DB::table('label_task')->insert([
-                        'label_id' => $label,
-                        'task_id' => $task->id
-                    ]);
-            }
-        }
+        $labels = $request->labels;
+        $task->labels()->attach($labels);
 
-            flash(__('flash.task_created'))->success();
-            return redirect()
-                ->route('tasks.index');
-        }
+        flash(__('flash.task_created'))->success();
+        return redirect()
+            ->route('tasks.index');
     }
 
     /**
@@ -89,17 +79,20 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Task $task)
     {
-        $task = Task::findOrFail($id);
         $status = TaskStatus::findOrFail($task->status_id);
-        $labels = DB::select('select * from label_task where task_id = ?', [$task->id]);
-        $labels_names = [];
+        $labels = DB::table('label_task')
+                    ->where('task_id', '=', $task->id)
+                    ->get();
+        $labelsNames = [];
         foreach ($labels as $label) {
-            $labels_names[] = DB::table('labels')->where('id', [$label->label_id])->pluck('name');
+            $labelsNames[] = DB::table('labels')
+                                ->where('id', [$label->label_id])
+                                ->pluck('name');
         }
 
-        return view('tasks.show', compact('task', 'status', 'labels_names'));
+        return view('tasks.show', compact('task', 'status', 'labelsNames'));
     }
 
     /**
@@ -125,27 +118,20 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-          $data = $this->validate($request, [
+        $data = $this->validate($request, [
             'name' => 'required|unique:tasks,name,' . $task->id,
             'description' => 'required',
             'status_id' => 'required',
             'assigned_to_id' => 'required',
-          ]);
+        ]);
         $task->fill($data);
         $task->save();
 
-        DB::delete('delete from label_task where task_id = ?', [$task->id]);
-
+        DB::table('label_task')
+            ->where('task_id', '=', $task->id)
+            ->delete();
         $labels = $request->labels;
-        if ($labels) {
-            foreach ($labels as $label) {
-                //           dd($label);
-                DB::table('label_task')->insert([
-                    'label_id' => $label,
-                    'task_id' => $task->id
-                ]);
-            }
-        }
+        $task->labels()->attach($labels);
 
         flash(__('flash.task_changed'))->success();
         return redirect()
@@ -160,7 +146,7 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        DB::table('label_task')->where('task_id', '=', $task->id)->delete();
+        $task->labels()->detach();
         $task->delete();
         flash(__('flash.task_deleted'))->success();
         return redirect()

@@ -17,8 +17,8 @@
         <div>{{ __('tasks.description') }}: {{$task->description}}</div><br>
         <div>{{ __('tasks.labels') }}:<br>
             <ul>
-                @foreach ($labels_names as $label_name)
-                    <li>{{ $label_name[0] }}</li>
+                @foreach ($labelsNames as $labelName)
+                    <li>{{ $labelName[0] }}</li>
                 @endforeach
             </ul>
         </div>

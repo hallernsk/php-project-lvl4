@@ -14,7 +14,7 @@ class LabelController extends Controller
      */
     public function index()
     {
-        $labels = Label::paginate();
+        $labels = Label::paginate(15);
         return view('labels.index', compact('labels'));
     }
 
@@ -92,14 +92,10 @@ class LabelController extends Controller
     {
         if ($label->tasks()->exists()) {
             flash(__('flash.label_cannot_deleted'))->error();
-            return redirect()
-                ->route('labels.index');
-        };
-
-        if ($label) {
+        } else {
             $label->delete();
+            flash(__('flash.label_deleted'))->success();
         }
-        flash(__('flash.label_deleted'))->success();
         return redirect()
             ->route('labels.index');
     }
