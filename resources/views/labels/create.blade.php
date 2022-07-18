@@ -13,11 +13,11 @@
     @endif
 
     {{ Form::model($label, ['route' => 'labels.store']) }}
-    {{ Form::label('name', __('labels.name') ) }}
+    {{ Form::label('name', __('messages.name') ) }}
     {{ Form::text('name') }}<br>
-    {{ Form::label('description', __('labels.description') ) }}<br>
+    {{ Form::label('description', __('messages.description') ) }}<br>
     {{ Form::text('description') }}<br>
-    {{ Form::submit( __('labels.to_create') ) }}
+    {{ Form::submit( __('messages.to_create') ) }}
     {{ Form::close() }}
 
 @endsection

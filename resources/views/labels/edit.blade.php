@@ -13,11 +13,11 @@
     @endif
 
     {{ Form::model($label, ['route' => ['labels.update', $label], 'method' => 'PATCH']) }}
-    {{ Form::label('name', __('labels.name')) }}
+    {{ Form::label('name', __('messages.name')) }}
     {{ Form::text('name') }}<br>
-    {{ Form::label('description', __('labels.description') ) }}<br>
+    {{ Form::label('description', __('messages.description') ) }}<br>
     {{ Form::text('description') }}<br>
-    {{ Form::submit(__('task_statuses.to_update')) }}
+    {{ Form::submit(__('messages.to_update')) }}
     {{ Form::close() }}
 
 @endsection

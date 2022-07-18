@@ -13,19 +13,19 @@
     @endif
 
     {{ Form::model($task, ['route' => ['tasks.update', $task], 'method' => 'PATCH']) }}
-    {{ Form::label('name', __('tasks.name') ) }}<br>
+    {{ Form::label('name', __('messages.name') ) }}<br>
     {{ Form::text('name') }}<br>
-    {{ Form::label('description', __('tasks.description') ) }}<br>
+    {{ Form::label('description', __('messages.description') ) }}<br>
     {{ Form::text('description') }}<br>
-    {{ Form::label('status', __('tasks.status') ) }}<br>
+    {{ Form::label('status', __('messages.status') ) }}<br>
     {{ Form::select('status_id', $taskStatuses) }}<br>
-    {{ Form::label('performer', __('tasks.performer') ) }}<br>
+    {{ Form::label('performer', __('messages.performer') ) }}<br>
     {{ Form::select('assigned_to_id', $users) }}<br>
 
-    {{ Form::label('labels', __('tasks.labels') ) }}<br>
+    {{ Form::label('labels', __('messages.labels') ) }}<br>
     {{ Form::select('labels[]', $labels, null, ['multiple' => 'multiple']) }}<br>
 
-    {{ Form::submit( __('tasks.to_change') ) }}
+    {{ Form::submit( __('messages.to_change') ) }}
     {{ Form::close() }}
 
 @endsection

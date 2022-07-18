@@ -4,20 +4,20 @@
 
     @include('flash::message')
 
-    <h1>{{ __('labels.labels') }}</h1>
+    <h1>{{ __('messages.labels') }}</h1>
     @auth
         <a href="{{ route('labels.create') }}" class="btn btn-primary">
-            {{ __('labels.to_create') }}        </a>
+            {{ __('messages.to_create_label') }}        </a>
     @endauth
     <table class="table mt-2">
         <thead>
         <tr>
-            <th>{{ __('labels.id') }}</th>
-            <th>{{ __('labels.name') }}</th>
-            <th>{{ __('labels.description') }}</th>
-            <th>{{ __('labels.date_of_create') }}</th>
+            <th>{{ __('messages.id') }}</th>
+            <th>{{ __('messages.name') }}</th>
+            <th>{{ __('messages.description') }}</th>
+            <th>{{ __('messages.date_of_create') }}</th>
             @auth
-                <th>{{ __('labels.actions') }}</th>
+                <th>{{ __('messages.actions') }}</th>
             @endauth
         </tr>
         </thead>
@@ -33,14 +33,14 @@
                         <a
                             class="text-danger text-decoration-none"
                             href="{{ route('labels.destroy', $label) }}"
-                            data-confirm="{{ __('task_statuses.are_you_sure') }}"
+                            data-confirm="{{ __('messages.are_you_sure') }}"
                             data-method="delete"
                             rel="nofollow"
                         >
-                            {{ __('labels.to_delete') }}                        </a>
+                            {{ __('messages.to_delete') }}                        </a>
 
                         <a class="text-decoration-none" href="{{ route('labels.edit', $label) }}">
-                            {{ __('labels.to_change') }}                        </a>
+                            {{ __('messages.to_change') }}                        </a>
                     </td>
                 @endauth
             </tr>

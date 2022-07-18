@@ -11,11 +11,11 @@
             </ul>
         </div>
     @endif
-        <h1>{{ __('tasks.show_name') }}: {{$task->name}}</h1>
-        <div>{{ __('tasks.name') }}: {{$task->name}}</div><br>
-        <div>{{ __('tasks.status') }}: {{$status->name}}</div><br>
-        <div>{{ __('tasks.description') }}: {{$task->description}}</div><br>
-        <div>{{ __('tasks.labels') }}:<br>
+        <h1>{{ __('messages.show_task') }}: {{$task->name}}</h1>
+        <div>{{ __('messages.name') }}: {{$task->name}}</div><br>
+        <div>{{ __('messages.status') }}: {{$status->name}}</div><br>
+        <div>{{ __('messages.description') }}: {{$task->description}}</div><br>
+        <div>{{ __('messages.labels') }}:<br>
             <ul>
                 @foreach ($labelsNames as $labelName)
                     <li>{{ $labelName[0] }}</li>

@@ -4,33 +4,33 @@
 
     @include('flash::message')
 
-    <h1>{{ __('tasks.tasks') }}</h1>
+    <h1>{{ __('messages.tasks') }}</h1>
 
 <div>
     {{--    {{ Form::model($task, ['route' => 'tasks.index']) }}    --}}
     {{ Form::open(['url' => route('tasks.index'), 'method' => 'get']) }}
-    {{ Form::select('filter[status_id]', $statuses, null, ['placeholder' => __('tasks.status')]) }}
-    {{ Form::select('filter[created_by_id]', $users, null, ['placeholder' => __('tasks.author')]) }}
-    {{ Form::select('filter[assigned_to_id]', $users, null, ['placeholder' => __('tasks.performer')]) }}
-    {{ Form::submit( __('tasks.to_apply') ) }}
+    {{ Form::select('filter[status_id]', $statuses, null, ['placeholder' => __('messages.status')]) }}
+    {{ Form::select('filter[created_by_id]', $users, null, ['placeholder' => __('messages.author')]) }}
+    {{ Form::select('filter[assigned_to_id]', $users, null, ['placeholder' => __('messages.performer')]) }}
+    {{ Form::submit( __('messages.to_apply') ) }}
     {{ Form::close() }}
 </div>
 
 @auth
 <a href="{{ route('tasks.create') }}" class="btn btn-primary">
-    {{ __('tasks.to_create_task') }}        </a>
+    {{ __('messages.to_create_task') }}        </a>
 @endauth
 <table class="table mt-2">
     <thead>
     <tr>
-        <th>{{ __('tasks.id') }}</th>
-        <th>{{ __('tasks.status') }}</th>
-        <th>{{ __('tasks.name') }}</th>
-        <th>{{ __('tasks.author') }}</th>
-        <th>{{ __('tasks.performer') }}</th>
-        <th>{{ __('tasks.date_of_create') }}</th>
+        <th>{{ __('messages.id') }}</th>
+        <th>{{ __('messages.status') }}</th>
+        <th>{{ __('messages.name') }}</th>
+        <th>{{ __('messages.author') }}</th>
+        <th>{{ __('messages.performer') }}</th>
+        <th>{{ __('messages.date_of_create') }}</th>
         @auth
-        <th>{{ __('tasks.actions') }}</th>
+        <th>{{ __('messages.actions') }}</th>
         @endauth
     </tr>
     </thead>
@@ -50,14 +50,14 @@
                 <a
                     class="text-danger text-decoration-none"
                     href="{{ route('tasks.destroy', $task) }}"
-                    data-confirm="{{ __('tasks.are_you_sure') }}"
+                    data-confirm="{{ __('messages.are_you_sure') }}"
                     data-method="delete"
                     rel="nofollow"
                 >
-                    {{ __('tasks.to_delete') }}                        </a>
+                    {{ __('messages.to_delete') }}                        </a>
                 @endif
                 <a class="text-decoration-none" href="{{ route('tasks.edit', $task) }}">
-                    {{ __('tasks.to_change') }}                        </a>
+                    {{ __('messages.to_change') }}                        </a>
             </td>
             @endauth
         </tr>
