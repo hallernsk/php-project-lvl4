@@ -9,11 +9,10 @@ use Tests\TestCase;
 class LabelControllerTest extends TestCase
 {
     /**
-     * A basic feature test example.
      *
      * @return void
      */
-    use RefreshDatabase;
+  //  use RefreshDatabase;
 
     protected function setUp(): void
     {
@@ -68,6 +67,5 @@ class LabelControllerTest extends TestCase
 
         $this->assertDatabaseMissing('labels', $label->only('id'));
     }
-
 }
 

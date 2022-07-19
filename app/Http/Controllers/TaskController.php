@@ -88,7 +88,7 @@ class TaskController extends Controller
         $labelsNames = [];
         foreach ($labels as $label) {
             $labelsNames[] = DB::table('labels')
-                                ->where('id', [$label->label_id])
+                                ->where('id', $label->label_id)
                                 ->pluck('name');
         }
 

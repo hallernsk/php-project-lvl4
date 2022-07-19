@@ -21,7 +21,7 @@
     {{ Form::text('description') }}<br><br>
     {{ Form::label('status_id', __('messages.status') ) }}<br>
     {{ Form::select('status_id', $taskStatuses, null, ['placeholder' => '----------']) }}<br><br>
-    {{ Form::label('performer', __('tasks.performer') ) }}<br>
+    {{ Form::label('performer', __('messages.performer') ) }}<br>
     {{ Form::select('assigned_to_id', $users, null, ['placeholder' => '----------']) }}<br><br>
     {{ Form::label('labels', __('messages.labels') ) }}<br>
     {{ Form::select('labels[]', $labels, null, ['multiple' => 'multiple', 'placeholder' => '']) }}<br><br>
