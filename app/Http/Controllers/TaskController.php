@@ -41,9 +41,9 @@ class TaskController extends Controller
     public function create()
     {
         $task = new Task();
-        $taskStatuses = TaskStatus::pluck('name', 'id')->all();
-        $users = User::pluck('name', 'id')->all();
-        $labels = Label::pluck('name', 'id')->all();
+        $taskStatuses = TaskStatus::pluck('name', 'id');
+        $users = User::pluck('name', 'id');
+        $labels = Label::pluck('name', 'id');
         return view('tasks.create', compact('task', 'taskStatuses', 'users', 'labels'));        //
     }
 
@@ -56,7 +56,7 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $data = $this->validate($request, [
-            'name' => 'required|unique:tasks',
+            'name' => 'required|max:255|unique:tasks',
             'status_id' => 'required',
             'description' => 'required',
             'assigned_to_id' => 'required',
