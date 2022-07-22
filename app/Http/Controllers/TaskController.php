@@ -56,7 +56,7 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $data = $this->validate($request, [
-            'name' => 'required|max:255|unique:tasks',
+            'name' => 'required|unique:tasks',
             'status_id' => 'required',
             'description' => 'required',
             'assigned_to_id' => 'required',
@@ -124,14 +124,12 @@ class TaskController extends Controller
             'status_id' => 'required',
             'assigned_to_id' => 'required',
         ]);
-        $task->fill($data);
-        $task->save();
+/*      $task->fill($data);
+        $task->save();*/
+        $task->update($data);
 
-        DB::table('label_task')
-            ->where('task_id', '=', $task->id)
-            ->delete();
         $labels = $request->labels;
-        $task->labels()->attach($labels);
+        $task->labels()->sync($labels);
 
         flash(__('flash.task_changed'))->success();
         return redirect()
