@@ -38,8 +38,8 @@ class LabelController extends Controller
     public function store(Request $request)
     {
         $data = $this->validate($request, [
-            'name' => 'required|unique:labels',
-            'description' => 'required',
+            'name' => 'required|max:255|unique:labels',
+            'description' => 'required|max:255',
         ]);
 
         $label = new Label();
@@ -71,8 +71,8 @@ class LabelController extends Controller
     public function update(Request $request, Label $label)
     {
         $data = $this->validate($request, [
-            'name' => 'required|unique:labels,name,' . $label->id,
-            'description' => 'required',
+            'name' => 'required|max:255|unique:labels,name,' . $label->id,
+            'description' => 'required|max:255',
         ]);
 
         $label->fill($data);

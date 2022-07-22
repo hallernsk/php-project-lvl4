@@ -40,7 +40,7 @@ class TaskStatusController extends Controller
     public function store(Request $request)
     {
         $data = $this->validate($request, [
-            'name' => 'required|unique:task_statuses',
+            'name' => 'required|max:255|unique:task_statuses',
            ]);
 
         $taskStatus = new TaskStatus();
@@ -72,7 +72,7 @@ class TaskStatusController extends Controller
     public function update(Request $request, TaskStatus $taskStatus)
     {
         $data = $this->validate($request, [
-            'name' => 'required|unique:task_statuses,name,' . $taskStatus->id,
+            'name' => 'required|max:255|unique:task_statuses,name,' . $taskStatus->id,
          ]);
         $taskStatus->fill($data);
         $taskStatus->save();

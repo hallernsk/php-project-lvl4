@@ -16,7 +16,7 @@
     {{ Form::label('name', __('messages.name') ) }}<br>
     {{ Form::text('name') }}<br>
     {{ Form::label('description', __('messages.description') ) }}<br>
-    {{ Form::text('description') }}<br>
+    {{ Form::textarea('description') }}<br>
     {{ Form::label('status', __('messages.status') ) }}<br>
     {{ Form::select('status_id', $taskStatuses) }}<br>
     {{ Form::label('performer', __('messages.performer') ) }}<br>

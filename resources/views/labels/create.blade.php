@@ -16,7 +16,7 @@
     {{ Form::label('name', __('messages.name') ) }}
     {{ Form::text('name') }}<br>
     {{ Form::label('description', __('messages.description') ) }}<br>
-    {{ Form::text('description') }}<br>
+    {{ Form::textarea('description') }}<br>
     {{ Form::submit( __('messages.to_create') ) }}
     {{ Form::close() }}
 
