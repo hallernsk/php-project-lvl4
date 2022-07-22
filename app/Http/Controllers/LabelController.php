@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Label;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 
 class LabelController extends Controller
@@ -10,9 +13,9 @@ class LabelController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         $labels = Label::paginate(15);
         return view('labels.index', compact('labels'));
@@ -21,9 +24,9 @@ class LabelController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function create()
+    public function create(): View
     {
         $label = new Label();
         return view('labels.create', compact('label'));
@@ -32,10 +35,10 @@ class LabelController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $data = $this->validate($request, [
             'name' => 'required|max:255|unique:labels',
@@ -50,13 +53,13 @@ class LabelController extends Controller
             ->route('labels.index');
     }
 
-     /**
+    /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Label $label
+     * @return View
      */
-    public function edit(Label $label)
+    public function edit(Label $label): View
     {
         return view('labels.edit', compact('label'));
     }
@@ -64,11 +67,12 @@ class LabelController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Label $label
+     * @return RedirectResponse
+     * @throws ValidationException
      */
-    public function update(Request $request, Label $label)
+    public function update(Request $request, Label $label): RedirectResponse
     {
         $data = $this->validate($request, [
             'name' => 'required|max:255|unique:labels,name,' . $label->id,
@@ -85,10 +89,10 @@ class LabelController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Label $label
+     * @return RedirectResponse
      */
-    public function destroy(Label $label)
+    public function destroy(Label $label): RedirectResponse
     {
         if ($label->tasks()->exists()) {
             flash(__('flash.label_cannot_deleted'))->error();

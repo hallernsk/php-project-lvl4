@@ -6,9 +6,12 @@ use App\Models\Task;
 use App\Models\TaskStatus;
 use App\Models\User;
 use App\Models\Label;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -17,9 +20,10 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $tasks = QueryBuilder::for(Task::class)
             ->allowedFilters([
@@ -36,9 +40,9 @@ class TaskController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function create()
+    public function create(): View
     {
         $task = new Task();
         $taskStatuses = TaskStatus::pluck('name', 'id');
@@ -50,10 +54,10 @@ class TaskController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  Request $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $data = $this->validate($request, [
             'name' => 'required|max:255|unique:tasks',
@@ -76,10 +80,10 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Task $task
+     * @return View
      */
-    public function show(Task $task)
+    public function show(Task $task): View
     {
         $status = TaskStatus::findOrFail($task->status_id);
         $labels = DB::table('label_task')
@@ -98,10 +102,10 @@ class TaskController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Task $task
+     * @return View
      */
-    public function edit(Task $task)
+    public function edit(Task $task): View
     {
         $taskStatuses = TaskStatus::pluck('name', 'id');
         $users = User::pluck('name', 'id');
@@ -112,11 +116,12 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Task $task
+     * @return RedirectResponse
+     * @throws ValidationException
      */
-    public function update(Request $request, Task $task)
+    public function update(Request $request, Task $task): RedirectResponse
     {
         $data = $this->validate($request, [
             'name' => 'required|max:255|unique:tasks,name,' . $task->id,
@@ -139,10 +144,10 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Task $task
+     * @return RedirectResponse
      */
-    public function destroy(Task $task)
+    public function destroy(Task $task): RedirectResponse
     {
         $task->labels()->detach();
         $task->delete();

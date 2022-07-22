@@ -3,18 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\TaskStatus;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-
-use function PHPUnit\Framework\isEmpty;
+use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 
 class TaskStatusController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         $taskStatuses = TaskStatus::paginate(15);
         return view('task_statuses.index', compact('taskStatuses'));
@@ -23,9 +24,9 @@ class TaskStatusController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function create()
+    public function create(): View
     {
         $taskStatus = new TaskStatus();
         return view('task_statuses.create', compact('taskStatus'));
@@ -34,10 +35,11 @@ class TaskStatusController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return RedirectResponse
+     * @throws ValidationException
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $data = $this->validate($request, [
             'name' => 'required|max:255|unique:task_statuses',
@@ -54,10 +56,10 @@ class TaskStatusController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\TaskStatus  $taskStatus
-     * @return \Illuminate\Http\Response
+     * @param TaskStatus $taskStatus
+     * @return View
      */
-    public function edit(TaskStatus $taskStatus)
+    public function edit(TaskStatus $taskStatus): View
     {
         return view('task_statuses.edit', compact('taskStatus'));
     }
@@ -65,11 +67,11 @@ class TaskStatusController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\TaskStatus  $taskStatus
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param TaskStatus $taskStatus
+     * @return RedirectResponse
      */
-    public function update(Request $request, TaskStatus $taskStatus)
+    public function update(Request $request, TaskStatus $taskStatus): RedirectResponse
     {
         $data = $this->validate($request, [
             'name' => 'required|max:255|unique:task_statuses,name,' . $taskStatus->id,
@@ -84,10 +86,10 @@ class TaskStatusController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\TaskStatus  $taskStatus
-     * @return \Illuminate\Http\Response
+     * @param TaskStatus $taskStatus
+     * @return RedirectResponse
      */
-    public function destroy(TaskStatus $taskStatus)
+    public function destroy(TaskStatus $taskStatus): RedirectResponse
     {
         if ($taskStatus->tasks()->exists()) {
             flash(__('flash.status_cannot_deleted'))->error();
