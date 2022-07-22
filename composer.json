@@ -15,6 +15,7 @@
         "laravel/ui": "^3.4",
         "laravelcollective/html": "^6.3",
         "rollbar/rollbar-laravel": "^7.0",
+        "spatie/laravel-http-logger": "^1.10",
         "spatie/laravel-query-builder": "*",
         "symfony/yaml": "^6.1"
     },
