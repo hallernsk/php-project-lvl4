@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+<main class="container">
     @if ($errors->any())
         <div>
             <ul>
@@ -12,9 +12,9 @@
         </div>
     @endif
 
-    <h1>{{ __('messages.to_create_task') }}</h1>
+    <h1 class=" mb-5>{{ __('messages.to_create_task') }}</h1>
 
-    {{ Form::model($task, ['route' => 'tasks.store']) }}
+    {{ Form::model($task, ['route' => 'tasks.store', 'class' => 'w-50']) }}
     {{ Form::label('name', __('messages.name') ) }}<br>
     {{ Form::text('name') }}<br><br>
     {{ Form::label('description', __('messages.description') ) }}<br>
@@ -27,5 +27,5 @@
     {{ Form::select('labels[]', $labels, null, ['multiple' => 'multiple', 'placeholder' => '']) }}<br><br>
     {{ Form::submit( __('messages.to_create') ) }}
     {{ Form::close() }}
-
+</main>
 @endsection

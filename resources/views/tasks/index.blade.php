@@ -3,7 +3,7 @@
 @section('content')
 
     @include('flash::message')
-
+    <main class="container">
     <h1>{{ __('messages.tasks') }}</h1>
 
     <div>
@@ -65,4 +65,5 @@
         @endforeach
     </table>
     {{ $tasks->links() }}
+    </main>
 @endsection

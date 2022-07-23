@@ -3,6 +3,7 @@
 @section('content')
 
     @include('flash::message')
+    <main class="container">
 
     <h1>{{ __('messages.statuses') }}</h1>
     @auth
@@ -46,6 +47,7 @@
         @endforeach
     </table>
     {{ $taskStatuses->links() }}
+    </main>
 @endsection
 
 

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+<main class="container">
     @if ($errors->any())
         <div>
             <ul>
@@ -22,5 +22,6 @@
                 @endforeach
             </ul>
         </div>
+</main>
 @endsection
 

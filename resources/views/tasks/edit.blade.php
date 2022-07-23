@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+<main class="container">
     @if ($errors->any())
         <div>
             <ul>
@@ -27,5 +27,5 @@
 
     {{ Form::submit( __('messages.to_change') ) }}
     {{ Form::close() }}
-
+</main>
 @endsection
