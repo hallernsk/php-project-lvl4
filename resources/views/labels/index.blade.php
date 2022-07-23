@@ -47,6 +47,6 @@
 
         @endforeach
     </table>
-
+    {{ $labels->links() }}
 @endsection
 

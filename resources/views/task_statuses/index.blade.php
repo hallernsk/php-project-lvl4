@@ -45,7 +45,7 @@
 
         @endforeach
     </table>
-
+    {{ $taskStatuses->links() }}
 @endsection
 
 

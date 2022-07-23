@@ -31,7 +31,7 @@ class TaskController extends Controller
                 AllowedFilter::exact('created_by_id'),
                 AllowedFilter::exact('assigned_to_id')
             ])
-            ->get();
+            ->paginate(15);
         $statuses = TaskStatus::pluck('name', 'id');
         $users = User::pluck('name', 'id');
         return view('tasks.index', ['tasks' => $tasks, 'statuses' => $statuses, 'users' => $users]);
@@ -54,8 +54,9 @@ class TaskController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request $request
+     * @param Request $request
      * @return RedirectResponse
+     * @throws ValidationException
      */
     public function store(Request $request): RedirectResponse
     {
