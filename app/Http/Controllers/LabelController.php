@@ -42,7 +42,7 @@ class LabelController extends Controller
     {
         $data = $this->validate($request, [
             'name' => 'required|max:255|unique:labels',
-            'description' => 'required|max:255',
+            'description' => 'nullable|max:255',
         ]);
 
         $label = new Label();
@@ -76,7 +76,7 @@ class LabelController extends Controller
     {
         $data = $this->validate($request, [
             'name' => 'required|max:255|unique:labels,name,' . $label->id,
-            'description' => 'required|max:255',
+            'description' => 'nullable|max:255',
         ]);
 
         $label->fill($data);

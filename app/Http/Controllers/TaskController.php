@@ -63,8 +63,8 @@ class TaskController extends Controller
         $data = $this->validate($request, [
             'name' => 'required|max:255|unique:tasks',
             'status_id' => 'required',
-            'description' => 'required|max:255',
-            'assigned_to_id' => 'required',
+            'description' => 'nullable|max:255',
+            'assigned_to_id' => 'nullable',
         ]);
         $user = Auth::user();
         $task = $user->tasksCreated()->make($data);
@@ -126,9 +126,9 @@ class TaskController extends Controller
     {
         $data = $this->validate($request, [
             'name' => 'required|max:255|unique:tasks,name,' . $task->id,
-            'description' => 'required|max:255',
+            'description' => 'nullable|max:255',
             'status_id' => 'required',
-            'assigned_to_id' => 'required',
+            'assigned_to_id' => 'nullable',
         ]);
 /*      $task->fill($data);
         $task->save();*/
