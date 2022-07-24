@@ -44,6 +44,7 @@ class LabelController extends Controller
             'name' => 'required|max:255|unique:labels',
             'description' => 'nullable|max:255',
         ], [
+            'name.required' => __('validation.label.required'),
             'name.unique' => __('validation.label.name')
         ]);
 
@@ -80,6 +81,7 @@ class LabelController extends Controller
             'name' => 'required|max:255|unique:labels,name,' . $label->id,
             'description' => 'nullable|max:255',
         ], [
+            'name.required' => __('validation.label.required'),
             'name.unique' => __('validation.label.name')
         ]);
 

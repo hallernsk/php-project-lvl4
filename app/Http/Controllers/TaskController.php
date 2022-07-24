@@ -66,7 +66,9 @@ class TaskController extends Controller
             'description' => 'nullable|max:255',
             'assigned_to_id' => 'nullable',
         ], [
-            'name.unique' => __('validation.task.name')
+            'name.required' => __('validation.task.required'),
+            'name.unique' => __('validation.task.name'),
+            'status_id.required' => __('validation.status_id.required')
         ]);
         $user = Auth::user();
         $task = $user->tasksCreated()->make($data);
@@ -132,7 +134,9 @@ class TaskController extends Controller
             'status_id' => 'required',
             'assigned_to_id' => 'nullable',
         ], [
-            'name.unique' => __('validation.task.name')
+            'name.required' => __('validation.task.required'),
+            'name.unique' => __('validation.task.name'),
+            'status_id.required' => __('validation.status_id.required')
         ]);
 
         $task->update($data);

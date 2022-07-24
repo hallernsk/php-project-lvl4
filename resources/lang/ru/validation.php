@@ -130,30 +130,36 @@ return [
     'uuid' => 'The :attribute must be a valid UUID.',
 
     'task' => [
-        'name' => 'Задача с таким именем уже существует',
+        'required' => 'Это обязательное поле',
+        'name' => 'Задача с таким именем уже существует'
     ],
     'task_status' => [
-        'name' => 'Статус с таким именем уже существует',
+        'required' => 'Это обязательное поле',
+        'name' => 'Статус с таким именем уже существует'
     ],
     'label' => [
-        'name' => 'Метка с таким именем уже существует',
+        'required' => 'Это обязательное поле',
+        'name' => 'Метка с таким именем уже существует'
     ],
-     /*
-    |--------------------------------------------------------------------------
-    | Custom Validation Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. This makes it quick to
-    | specify a specific custom language line for a given attribute rule.
-    |
-    */
+    'status_id' => [
+        'required' => 'Это обязательное поле'
+    ],
+    /*
+   |--------------------------------------------------------------------------
+   | Custom Validation Language Lines
+   |--------------------------------------------------------------------------
+   |
+   | Here you may specify custom validation messages for attributes using the
+   | convention "attribute.rule" to name the lines. This makes it quick to
+   | specify a specific custom language line for a given attribute rule.
+   |
+   */
 
     'custom' => [
 
-        'name' => [
-            'required' => 'Это обязательное поле',
-        ],
+//        'name' => [
+//            'required' => 'Это обязательное поле',
+//        ],
         'email' => [
             'unique' => 'Пользователь с таким Email уже уже существует'
         ],
