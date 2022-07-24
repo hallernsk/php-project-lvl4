@@ -67,4 +67,3 @@ class LabelControllerTest extends TestCase
         $this->assertDatabaseMissing('labels', $label->only('id'));
     }
 }
-

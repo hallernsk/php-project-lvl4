@@ -67,5 +67,4 @@ class TaskStatusControllerTest extends TestCase
         $response->assertRedirect(route('task_statuses.index'));
         $this->assertDatabaseMissing('task_statuses', $taskStatus->only('id'));
     }
-
 }
