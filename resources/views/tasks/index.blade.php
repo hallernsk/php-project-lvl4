@@ -42,7 +42,7 @@
                 <td><a href="{{ route('tasks.show', ['task' => $task]) }} ">{{ $task->name }}</td>
                 <td>{{ $task->creator->name }}</td> <!--  создатель (name) -->
                 <td>{{ $task->performer->name ?? null}}</td> <!-- исполнитель (name) -->
-                <td>{{ $task->created_at->format('d-m-Y') }}</td>
+                <td>{{ $task->created_at->format('d.m.Y') }}</td>
                 @auth
 
                     <td>
