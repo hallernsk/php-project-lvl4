@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="csrf-param" content="_token" >
 
-    <title>{{ 'Менеджер задач' }}</title>
+    <title>{{ __('messages.tasks_manager') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
