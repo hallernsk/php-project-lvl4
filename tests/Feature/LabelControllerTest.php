@@ -33,7 +33,7 @@ class LabelControllerTest extends TestCase
 
     public function testStore()
     {
-        $data = Label::factory()->make()->only('name', 'description');
+        $data = Label::factory()->make()->only(['name', 'description']);
         $response = $this->post(route('labels.store'), $data);
         $response->assertRedirect(route('labels.index'));
         $response->assertSessionHasNoErrors();
@@ -50,7 +50,7 @@ class LabelControllerTest extends TestCase
     public function testUpdate()
     {
         $label = Label::factory()->create();
-        $data = Label::factory()->make()->only('name', 'description');
+        $data = Label::factory()->make()->only(['name', 'description']);
         $response = $this->patch(route('labels.update', $label), $data);
         $response->assertRedirect(route('labels.index'));
         $response->assertSessionHasNoErrors();
@@ -63,7 +63,6 @@ class LabelControllerTest extends TestCase
         $response = $this->delete(route('labels.destroy', [$label]));
         $response->assertSessionHasNoErrors();
         $response->assertRedirect(route('labels.index'));
-
-        $this->assertDatabaseMissing('labels', $label->only('id'));
+        $this->assertDatabaseMissing('labels', ['id' => $label->id]);
     }
 }

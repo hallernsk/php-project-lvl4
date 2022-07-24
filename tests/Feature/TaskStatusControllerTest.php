@@ -34,7 +34,7 @@ class TaskStatusControllerTest extends TestCase
 
     public function testStore()
     {
-        $data = TaskStatus::factory()->make()->only('name');
+        $data = TaskStatus::factory()->make()->only(['name']);
         $response = $this->post(route('task_statuses.store'), $data);
         $response->assertRedirect(route('task_statuses.index'));
         $response->assertSessionHasNoErrors();
@@ -52,7 +52,7 @@ class TaskStatusControllerTest extends TestCase
     public function testUpdate()
     {
         $taskStatus = TaskStatus::factory()->create();
-        $data = TaskStatus::factory()->make()->only('name');
+        $data = TaskStatus::factory()->make()->only(['name']);
         $response = $this->patch(route('task_statuses.update', $taskStatus), $data);
         $response->assertRedirect(route('task_statuses.index'));
         $response->assertSessionHasNoErrors();
@@ -65,6 +65,6 @@ class TaskStatusControllerTest extends TestCase
         $response = $this->delete(route('task_statuses.destroy', [$taskStatus]));
         $response->assertSessionHasNoErrors();
         $response->assertRedirect(route('task_statuses.index'));
-        $this->assertDatabaseMissing('task_statuses', $taskStatus->only('id'));
+        $this->assertDatabaseMissing('task_statuses', ['id' => $taskStatus->id]);
     }
 }
