@@ -12,9 +12,9 @@
         </div>
     @endif
 
-    <h1 class=" mb-5>{{ __('messages.to_create_task') }}</h1>
+    <h1>{{ __('messages.to_create_task') }}</h1>
 
-    {{ Form::model($task, ['route' => 'tasks.store', 'class' => 'w-50']) }}
+    {{ Form::model($task, ['route' => 'tasks.store']) }}
     {{ Form::label('name', __('messages.name') ) }}<br>
     {{ Form::text('name') }}<br><br>
     {{ Form::label('description', __('messages.description') ) }}<br>
