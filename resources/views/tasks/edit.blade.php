@@ -25,7 +25,7 @@
     {{ Form::label('labels', __('messages.labels') ) }}<br>
     {{ Form::select('labels[]', $labels, null, ['multiple' => 'multiple']) }}<br>
 
-    {{ Form::submit( __('messages.to_change') ) }}
+    {{ Form::submit( __('messages.to_update') ) }}
     {{ Form::close() }}
 </main>
 @endsection
