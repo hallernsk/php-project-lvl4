@@ -29,7 +29,7 @@ test-coverage:
 	XDEBUG_MODE=coverage composer exec --verbose phpunit tests -- --coverage-clover build/logs/clover.xml
 
 lint:
-	composer run-script phpcs -- --standard=PSR12 app
+	composer exec phpcs -- --standard=PSR12 app
 
 lint-fix:
 	composer phpcbf
