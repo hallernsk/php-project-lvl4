@@ -2,7 +2,6 @@
 
 @section('content')
 
-    @include('flash::message')
     <main class="container">
 
     <h1>{{ __('messages.labels') }}</h1>
