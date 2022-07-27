@@ -133,6 +133,7 @@ class TaskController extends Controller
             'description' => 'nullable|max:255',
             'status_id' => 'required',
             'assigned_to_id' => 'nullable',
+            'labels' => 'nullable'
         ], [
             'name.required' => __('validation.task.required'),
             'name.unique' => __('validation.task.name'),
@@ -140,9 +141,13 @@ class TaskController extends Controller
         ]);
 
         $task->update($data);
+        $labels = $request->input('labels');
 
-        $labels = $request->labels;
-        $task->labels()->sync($labels);
+        if (is_array($labels)) {
+            $task->labels()->sync(array_filter($labels));
+        } else {
+            $task->labels()->detach();
+        }
 
         flash(__('flash.task_changed'))->success();
         return redirect()

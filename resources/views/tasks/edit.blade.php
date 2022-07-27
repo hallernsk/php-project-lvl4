@@ -23,7 +23,7 @@
     {{ Form::select('assigned_to_id', $users) }}<br>
 
     {{ Form::label('labels', __('messages.labels') ) }}<br>
-    {{ Form::select('labels[]', $labels, null, ['multiple' => 'multiple']) }}<br>
+    {{ Form::select('labels[]', $labels, null, ['multiple' => 'multiple', 'placeholder' => '']) }}<br>
 
     {{ Form::submit( __('messages.to_update') ) }}
     {{ Form::close() }}
