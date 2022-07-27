@@ -32,9 +32,11 @@ class TaskController extends Controller
                 AllowedFilter::exact('assigned_to_id')
             ])
             ->paginate(15);
+        $filter = $request->input('filter');
         $statuses = TaskStatus::pluck('name', 'id');
         $users = User::pluck('name', 'id');
-        return view('tasks.index', ['tasks' => $tasks, 'statuses' => $statuses, 'users' => $users]);
+        return view('tasks.index', [
+            'tasks' => $tasks, 'statuses' => $statuses, 'users' => $users, 'filter' => $filter]);
     }
 
     /**

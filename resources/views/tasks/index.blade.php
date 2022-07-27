@@ -6,11 +6,10 @@
     <h1>{{ __('messages.tasks') }}</h1>
 
     <div>
-        {{--    {{ Form::model($task, ['route' => 'tasks.index']) }}    --}}
         {{ Form::open(['url' => route('tasks.index'), 'method' => 'get']) }}
-        {{ Form::select('filter[status_id]', $statuses, null, ['placeholder' => __('messages.status')]) }}
-        {{ Form::select('filter[created_by_id]', $users, null, ['placeholder' => __('messages.author')]) }}
-        {{ Form::select('filter[assigned_to_id]', $users, null, ['placeholder' => __('messages.performer')]) }}
+        {{ Form::select('filter[status_id]', $statuses, $filter['status_id'] ?? null, ['placeholder' => __('messages.status')]) }}
+        {{ Form::select('filter[created_by_id]', $users, $filter['created_by_id'] ?? null, ['placeholder' => __('messages.author')]) }}
+        {{ Form::select('filter[assigned_to_id]', $users, $filter['assigned_to_id'] ??null, ['placeholder' => __('messages.performer')]) }}
         {{ Form::submit( __('messages.to_apply') ) }}
         {{ Form::close() }}
     </div>
