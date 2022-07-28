@@ -13,8 +13,8 @@
     @endif
 
     {{ Form::model($taskStatus, ['route' => 'task_statuses.store']) }}
-    {{ Form::label('name', __('messages.name') ) }}
-    {{ Form::text('name') }}<br>
+    {{ Form::label('name', __('messages.name') ) }}<br>
+    {{ Form::text('name') }}<br><br>
     {{ Form::submit( __('messages.to_create') ) }}
     {{ Form::close() }}
 </main>
