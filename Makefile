@@ -8,7 +8,7 @@ setup:
 	touch database/database.sqlite
 	php artisan migrate
 	php artisan db:seed
-	npm install
+	npm ci
 
 watch:
 	npm run watch
@@ -29,7 +29,7 @@ test-coverage:
 	XDEBUG_MODE=coverage composer exec --verbose phpunit tests -- --coverage-clover build/logs/clover.xml
 
 lint:
-	composer exec phpcs -- --standard=PSR12 app
+	composer phpcs -- --standard=PSR12 app
 
 lint-fix:
 	composer phpcbf
