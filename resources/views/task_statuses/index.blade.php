@@ -26,8 +26,8 @@
                 <td>{{ $taskStatus->id }}</td>
                 <td>{{ $taskStatus->name }}</td>
                 <td>{{ $taskStatus->created_at->format('d.m.Y') }}</td>
-                @auth
                 <td>
+                @can('delete', @$taskStatus)
                     <a
                         class="text-danger text-decoration-none"
                         href="{{ route('task_statuses.destroy', $taskStatus) }}"
@@ -36,11 +36,14 @@
                         rel="nofollow"
                     >
                         {{ __('messages.to_delete') }}                        </a>
+                @endcan
+                @can('update', @$taskStatus)
 
                     <a class="text-decoration-none" href="{{ route('task_statuses.edit', $taskStatus) }}">
                         {{ __('messages.to_change') }}                        </a>
+                @endcan
                 </td>
-                @endauth
+
             </tr>
 
         @endforeach

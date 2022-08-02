@@ -52,7 +52,6 @@
                     @endauth
                 </tr>
             </thead>
-
             <tbody>
             @foreach ($tasks as $task)
                 <tr>
@@ -62,9 +61,8 @@
                     <td>{{ $task->creator->name }}</td> <!--  создатель (name) -->
                     <td>{{ $task->performer->name ?? null}}</td> <!-- исполнитель (name) -->
                     <td>{{ $task->created_at->format('d.m.Y') }}</td>
-                    @auth
                     <td>
-                        @if ($task->created_by_id == Auth::id())
+                        @can('delete', $task)
                             <a
                                 class="text-danger text-decoration-none"
                                 href="{{ route('tasks.destroy', $task) }}"
@@ -73,11 +71,12 @@
                                 rel="nofollow"
                             >
                                 {{ __('messages.to_delete') }}                        </a>
-                        @endif
-                        <a class="text-decoration-none" href="{{ route('tasks.edit', $task) }}">
+                        @endcan
+                        @can('update', $task)
+                            <a class="text-decoration-none" href="{{ route('tasks.edit', $task) }}">
                             {{ __('messages.to_change') }}                        </a>
+                        @endcan
                     </td>
-                    @endauth
                 </tr>
             @endforeach
             </tbody>
