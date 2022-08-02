@@ -62,13 +62,11 @@ class TaskPolicy
      *
      * @param User $user
      * @param Task $task
-     * @return bool
+     * @return Response|bool
      */
-    public function delete(User $user, Task $task): bool
+    public function delete(User $user, Task $task): Response|bool
     {
-        //
-//        dd($task->creator->id);
-        return $user->id == $task->creator->id;
+        return $task->creator->is($user);
     }
 
     /**
