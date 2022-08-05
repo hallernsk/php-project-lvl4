@@ -92,18 +92,7 @@ class TaskController extends Controller
      */
     public function show(Task $task): View
     {
-        $status = TaskStatus::findOrFail($task->status_id);
-        $labels = DB::table('label_task')
-                    ->where('task_id', '=', $task->id)
-                    ->get();
-        $labelsNames = [];
-        foreach ($labels as $label) {
-            $labelsNames[] = DB::table('labels')
-                                ->where('id', $label->label_id)
-                                ->pluck('name');
-        }
-
-        return view('tasks.show', compact('task', 'status', 'labelsNames'));
+        return view('tasks.show', compact('task'));
     }
 
     /**
