@@ -15,13 +15,15 @@
         <div>{{ __('messages.name') }}: {{$task->name}}</div><br>
         <div>{{ __('messages.status') }}: {{$task->status->name}}</div><br>
         <div>{{ __('messages.description') }}: {{$task->description}}</div><br>
-        <div>{{ __('messages.labels') }}:<br>
-            <ul>
-                @foreach ($task->labels as $label)
-                    <li>{{ $label->name }}</li>
-                @endforeach
-            </ul>
-        </div>
+        @if($task->labels->isNotEmpty())
+            <div>{{ __('messages.labels') }}:<br>
+                <ul>
+                    @foreach ($task->labels as $label)
+                        <li>{{ $label->name }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 </main>
 @endsection
 
