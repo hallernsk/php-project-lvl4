@@ -26,7 +26,7 @@
                         <div class="container-fluid py-5">
                             <h1 class="display-5 fw-bold">{{ __('messages.greeting') }}</h1>
                             <p class="col-md-8 fs-4">{{ __('messages.description_welcome') }}</p>
-                            <button href="https://hexlet.io" class="btn btn-primary btn-lg" type="button">{{ __('messages.to_learn_more') }}</button>
+                            <a href="https://hexlet.io" class="btn btn-primary btn-lg" type="button">{{ __('messages.to_learn_more') }}</a>
                         </div>
                     </div>
                 </main>
