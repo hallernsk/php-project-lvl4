@@ -4,7 +4,7 @@
 
     <main class="container">
     <h1 class=" mb-5">{{ __('messages.tasks') }}</h1>
-        <div class="d-flex mb-3">
+        <div class="w-full flex">
             <div>
 
                 {{ Form::open(['url' => route('tasks.index'), 'method' => 'get']) }}
