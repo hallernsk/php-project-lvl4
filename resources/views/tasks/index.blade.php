@@ -26,17 +26,24 @@
                 {{ Form::close() }}
                 </div>
 
-                </div>
-            </div>
+                
 
-            <div class="ms-auto">
-            @auth
-                <a href="{{ route('tasks.create') }}" class="btn btn-primary ml-auto">
-                    {{ __('messages.to_create_task') }}        </a>
-            @endauth
+
+                <!-- <div class="ms-auto"> -->
+                <div class="col text-end">
+                @auth
+                    <a href="{{ route('tasks.create') }}" class="btn btn-primary ml-auto">
+                        {{ __('messages.to_create_task') }}        </a>
+                @endauth
+                </div>
+
+                </div>
+
             </div>
 
         </div>
+
+        <br>
 
         <table class="table me-2">
             <thead>

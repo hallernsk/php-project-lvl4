@@ -20,6 +20,8 @@ return [
     'performer' => 'Исполнитель',
     'date_of_create' => 'Дата создания',
     'to_create_task' => 'Создать задачу',
+    'to_change_task' => 'Изменение задачи',
+
     'to_change' => 'Изменить',
     'actions' => 'Действия',
     'to_apply' => 'Применить',
@@ -30,8 +32,11 @@ return [
 
     'to_update' => 'Обновить',
     'to_create_status' => 'Создать статус',
+    'to_change_status' => 'Изменение статуса',
+
+    'to_create_label' => 'Создать метку',
+    'to_change_label' => 'Изменение метки',
 
     'id' => 'ID',
-    'to_create_label' => 'Создать метку',
 
 ];

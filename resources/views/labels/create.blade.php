@@ -12,12 +12,14 @@
         </div>
     @endif
 
+    <h1>{{ __('messages.to_create_label') }}</h1>
+
     {{ Form::model($label, ['route' => 'labels.store']) }}
     {{ Form::label('name', __('messages.name') ) }}<br>
-    {{ Form::text('name') }}<br><br>
+    {{ Form::text('name', null, ['class' => 'w-25']) }}<br><br>
     {{ Form::label('description', __('messages.description') ) }}<br>
-    {{ Form::textarea('description') }}<br><br>
-    {{ Form::submit( __('messages.to_create') ) }}
+    {{ Form::textarea('description', null, ['class' => 'w-25']) }}<br><br>
+    {{ Form::submit( __('messages.to_create'), ['class' => 'btn btn-primary ml-auto'] ) }}
     {{ Form::close() }}
 </main>
 @endsection

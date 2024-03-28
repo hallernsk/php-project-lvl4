@@ -20,6 +20,7 @@ return [
     'performer' => 'Executor',
     'date_of_create' => 'Date of create',
     'to_create_task' => 'To create task',
+    'to_change_task' => 'Change task',
     'to_change' => 'To change',
     'actions' => 'Actions',
     'to_apply' => 'To apply',
@@ -30,8 +31,10 @@ return [
 
     'to_update' => 'To update',
     'to_create_status' => 'To create status',
+    'to_change_status' => 'Change status',
 
     'id' => 'ID',
     'to_create_label' => 'To create label',
+    'to_change_label' => 'Change label',
 
 ];
