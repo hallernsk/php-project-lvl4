@@ -3,22 +3,22 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/f9eefadfe29aa66221d2/test_coverage)](https://codeclimate.com/github/hallernsk/php-project-lvl4/test_coverage)
 [![Actions Status](https://github.com/hallernsk/php-project-lvl4/workflows/hexlet-check/badge.svg)](https://github.com/hallernsk/php-project-lvl4/actions)
 
-# Task manager
+# Менеджер задач
 
-Task management system. It allows you to set tasks, assign performers and change their statuses. Registration and authentication are required to work with the system.
+Система управления задачами. Позволяет создавать задачи, назначать им исполнителей и изменять их статусы. Для работы с системой требуется регистрация и авторизация.
 
-#### Demo:
+#### Демо проекта:
 
 https://php-lvl4.onrender.com
  
 
-#### Requirements:
+#### Требования:
 
 - Composer
 - PHP (^8.0)
 - Node.js & npm
 
-#### Installation:
+#### Установка:
 
 $ git clone https://github.com/hallernsk/php-project-lvl4.git
 
@@ -26,6 +26,6 @@ $ cd php-project-lvl4
 
 $ make setup
 
-#### Usage:
+#### Запуск:
 
 $ make start
