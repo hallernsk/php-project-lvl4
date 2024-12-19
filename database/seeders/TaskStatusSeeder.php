@@ -17,7 +17,7 @@ class TaskStatusSeeder extends Seeder
     public function run()
     {
         $statuses = [];
-        $statusNames = ['новый', 'в работе', 'на тестировании', 'завершен'];
+        $statusNames = ['новая', 'в работе', 'на тестировании', 'завершена'];
         foreach ($statusNames as $name) {
      //       $statuses[] = ['name' => $name, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()];
             TaskStatus::factory()->create(['name' => $name]);
